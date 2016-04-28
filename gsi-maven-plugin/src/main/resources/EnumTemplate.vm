@@ -1,0 +1,27 @@
+#include("header.vm") 
+
+package ${package}.model.type;
+
+/** 
+ *
+ * @author BTG PACTUAL - GSB
+ * @since 1.0
+ * 
+ */
+public enum ${enumName}Indicador {
+    #foreach ($constant in $constants)
+    ${constant.validValueProps.valueDisplayName}("${constant.validValueProps.name.content}"),
+    #end;
+
+    private String value;
+
+    ${enumName}Indicador(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return this.value;
+    }
+
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>TWELVE TI</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- Filtro Jersey -->	
+	<servlet>
+		<servlet-name>restSerlvet</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<!-- Tratamentos de erros -->
+	<servlet>
+		<description></description>
+		<display-name>ErrorHandler</display-name>
+		<servlet-name>ErrorHandler</servlet-name>
+		<servlet-class>com.twelve.dashboard.servlets.ErrorHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ErrorHandler</servlet-name>
+		<url-pattern>/ErrorHandler</url-pattern>
+	</servlet-mapping>
+
+	<!-- Configuracao dos servicos REST -->
+	<servlet-mapping>
+		<servlet-name>restSerlvet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>	
+		
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/ErrorHandler</location>
+	</error-page>
+	
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/ErrorHandler</location>
+	</error-page>	
+</web-app>
