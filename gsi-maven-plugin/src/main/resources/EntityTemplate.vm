@@ -204,7 +204,7 @@ $validator
     @Basic(fetch = FetchType.LAZY)
     #elseif($field.clob)
 @Lob
-    @Basic(fetch = FetchType.EAGER)    
+    @Basic(fetch = FetchType.LAZY)    
     #elseif($field.display)
 @Display
     #end

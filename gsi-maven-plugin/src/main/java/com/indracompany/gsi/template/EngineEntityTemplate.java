@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -184,6 +183,11 @@ public class EngineEntityTemplate extends AbstractTemplateMethod {
 												.getName().getContent()
 												.substring(2)));
 					}
+					
+					if(attribute.getAttributeProps().getComment().getContent() == null || attribute.getAttributeProps().getComment().getContent().replaceAll("\n", "").trim().equals("")) {
+						System.out.println("Sem comentarios: " + entity.getName() + " "  +  columnTO.getLogicalName());
+					}									
+					
 					columnTO.setComment(attribute.getAttributeProps()
 							.getComment().getContent().replaceAll("\n", "")
 							.trim().toUpperCase());
@@ -891,6 +895,11 @@ public class EngineEntityTemplate extends AbstractTemplateMethod {
 					.getEntityProps().getComment().getContent()
 					.replaceAll("\n", "").trim().toUpperCase()
 					: null);
+			
+			if(entity.getEntityProps().getComment() == null || entity.getEntityProps().getComment().getContent().replaceAll("\n", "").trim().equals("")) {
+				System.out.println("Sem comentarios: " + entityTO.getPhisycalName());
+			}
+			
 			AttributeProps attributeProps = this.getPK(entity);
 			entityTO.setPhysicalNamePK(attributeProps.getPhysicalName()
 					.getContent());
@@ -920,7 +929,7 @@ public class EngineEntityTemplate extends AbstractTemplateMethod {
 			persistence.append("<class>").append(this.getPathPackage().replace("/", ".")).append(TypeTemplate.ENTITY.getPrefixPackageImpl().replace("/", ".")).append(entityTO.getLogicalName()).append("</class>\n");
 			listPersistence.add(persistence.toString());
 
-			ejb.append("<weblogic-enterprise-bean>\n");
+			ejb.append("\n<weblogic-enterprise-bean>\n");
 			ejb.append("\t<ejb-name>").append(entityTO.getLogicalName()).append("ServiceImpl</ejb-name>\n");
 			ejb.append("\t<stateless-session-descriptor/>\n");
 			ejb.append("\t<enable-call-by-reference>true</enable-call-by-reference>\n");			
@@ -929,7 +938,7 @@ public class EngineEntityTemplate extends AbstractTemplateMethod {
 			listEjb.add(ejb.toString());
 			
 			ejb 		  = new StringBuilder();	
-			ejb.append("<weblogic-enterprise-bean>\n");
+			ejb.append("\n<weblogic-enterprise-bean>\n");
 			ejb.append("\t<ejb-name>").append(entityTO.getLogicalName()).append("DaoImpl</ejb-name>\n");
 			ejb.append("\t<stateless-session-descriptor/>\n");
 			ejb.append("\t<enable-call-by-reference>true</enable-call-by-reference>\n");

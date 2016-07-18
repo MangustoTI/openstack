@@ -22,7 +22,7 @@ import javax.ejb.TransactionAttributeType;
  
 @Remote(value = ${entityName}Service.class)
 @Stateless(mappedName = "${entityName}ServiceImpl")
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class ${entityName}ServiceImpl extends AbstractJpaEntityServiceImpl<${typePK}, ${entityName}> implements ${entityName}Service {
 
     private static final long serialVersionUID = 1L;
