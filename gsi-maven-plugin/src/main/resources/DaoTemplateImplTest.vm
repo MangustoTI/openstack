@@ -37,12 +37,8 @@ import com.indracompany.core.CriteriaCondition;
 import com.indracompany.core.DefaultCriteriaCondition;
 import com.indracompany.core.dao.jpa.AbstractDaoImplTest;
 
-/** 
- *
- * @author BTG PACTUAL - GSB
- * @since 1.0
- * 
- */
+#include("comments.vm")
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = "classpath:/${packageDefault}/dao/GenericJpaDaoTest-context.xml")
 public class ${entityName}DaoImplTest extends AbstractDaoImplTest<${entityName}, ${entityName}Dao> {

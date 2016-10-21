@@ -2,12 +2,8 @@
 
 package ${package}.model.type;
 
-/** 
- *
- * @author BTG PACTUAL - GSB
- * @since 1.0
- * 
- */
+#include("comments.vm")
+
 public enum ${enumName}Indicador {
     #foreach ($constant in $constants)
     ${constant.validValueProps.valueDisplayName}("${constant.validValueProps.name.content}"),

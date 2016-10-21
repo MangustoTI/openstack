@@ -7,12 +7,7 @@ import org.junit.Before;
 
 import com.indracompany.core.model.AbstractDomainBeanTest;
 
-/** 
- *
- * @author BTG PACTUAL - GSB
- * @since 1.0
- * 
- */
+#include("comments.vm")
 
 public class ${entity.logicalName}Test extends AbstractDomainBeanTest<${entity.logicalName}, ${entity.typePK.type}> {
 

@@ -49,7 +49,7 @@ public class EngineDaoTemplate extends EngineEntityTemplate {
 			
 			Map<String, Object> map   = new HashMap<String, Object>();
 			FileUtils.forceMkdir(new File(PackageType.JAVA.getValue() + this.getPathPackage().replace(".", "/") + TypeTemplate.DAO.getPrefixPackageImpl()));
-			FileUtils.forceMkdir(new File(PackageType.TEST.getValue() + this.getPathPackage().replace(".", "/") + TypeTemplate.DAO.getPrefixPackageImpl()));
+//			FileUtils.forceMkdir(new File(PackageType.TEST.getValue() + this.getPathPackage().replace(".", "/") + TypeTemplate.DAO.getPrefixPackageImpl()));
 
 			for(Entity entity : entities) {
 				String entityName     = this.getQualifiedFullName(entity.getEntityProps().getName().getContent());
@@ -61,8 +61,8 @@ public class EngineDaoTemplate extends EngineEntityTemplate {
 
 				String dataInterface 	= VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,  TypeTemplate.DAO.getFileTemplateInterface(), map);
 				String dataImpl 	    = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,  TypeTemplate.DAO.getFileTemplateImpl(), map);
-				String dataTest 	    = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,  TypeTemplate.DAO.getFileTemplateTest(), map);
-				this.write(TypeTemplate.DAO, entityName, dataInterface, dataImpl, dataTest, null);
+//				String dataTest 	    = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,  TypeTemplate.DAO.getFileTemplateTest(), map);
+				this.write(TypeTemplate.DAO, entityName, dataInterface, dataImpl, null, null);
 			}
 		}				
 	}

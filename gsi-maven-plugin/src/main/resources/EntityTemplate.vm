@@ -33,6 +33,10 @@ import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 #end
 import javax.persistence.Entity;
+#if($entity.useEnum)
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
+#end
 #if($entity.useFile || $entity.useClob)
 import javax.persistence.FetchType;
 #end
@@ -82,27 +86,15 @@ import $packageEnum;
 import $packageValidatorAplication;
 #end
 
-#if($entity.secondaryEntity && $entity.entityHierarchy)
-import com.btg.pactual.commons.model.entities.DomainEntity;
-#elseif(!$entity.secondaryEntity && !$entity.entityHierarchy)
-import com.btg.pactual.core.domain.DomainEntity;
-#end
+
 #if($entity.useDisplay)
 import com.btg.pactual.core.utilities.Display;
 #end
-#if($entity.useEnum)
-import com.btg.pactual.core.utilities.ObjectHelper;
-#end
 
-/** 
- *
- * @author BTG PACTUAL - GSB
- * @since 1.0
- * 
- */
+#include("comments.vm")
 
 @Entity
-@Table(name = "LCLIENT_DIGITAL_APP.${entity.phisycalName}")
+@Table(name = "${entity.phisycalName}")
 #if($entity.entityHierarchy && !$entity.secondaryEntity)
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "${entity.noteEntityConfiguration.discriminatorColumn}", discriminatorType = DiscriminatorType.INTEGER)
@@ -195,21 +187,27 @@ $validator
     #end
     #end
 
-    #if($field.date)
+#if($field.date)
 @Temporal(TemporalType.DATE)
-    #elseif($field.timestamp)
-@Temporal(TemporalType.TIMESTAMP)
-    #elseif($field.file)
+#elseif($field.timestamp)
+	@Temporal(TemporalType.TIMESTAMP)
+#elseif($field.file)
 @Lob
     @Basic(fetch = FetchType.LAZY)
-    #elseif($field.clob)
+#elseif($field.clob)
 @Lob
     @Basic(fetch = FetchType.LAZY)    
-    #elseif($field.display)
+#elseif($field.display)
 @Display
-    #end
-@Column(name = "$field.physicalName"#if(!$field.lengthNull), length = ${field.length}#end#if(!$field.precisionNull), precision = ${field.precision}#end#if(!$field.scaleNull), scale = ${field.scale}#end#if($field.nullable), nullable = false#end#if($field.file), columnDefinition = "BLOB"#end)
+#end
+#if($field.enumeration)
+	@Enumerated(EnumType.STRING)
+	@Column(name = "$field.physicalName"#if(!$field.lengthNull), length = ${field.length}#end#if(!$field.precisionNull), precision = ${field.precision}#end#if(!$field.scaleNull), scale = ${field.scale}#end#if($field.nullable), nullable = false#end#if($field.file), columnDefinition = "BLOB"#end)
+    private $field.enumName $field.logicalName.substring(0, 1).toLowerCase()$field.logicalName.substring(1);
+	#else
+	@Column(name = "$field.physicalName"#if(!$field.lengthNull), length = ${field.length}#end#if(!$field.precisionNull), precision = ${field.precision}#end#if(!$field.scaleNull), scale = ${field.scale}#end#if($field.nullable), nullable = false#end#if($field.file), columnDefinition = "BLOB"#end)
     private $field.type $field.logicalName.substring(0, 1).toLowerCase()$field.logicalName.substring(1);
+    #end
     #end
     #end
 
@@ -247,7 +245,8 @@ $validator
         #else
             #set($oneToMany = "")
         #end
-    #if(!$field.enumeration)
+
+     #if(!$field.enumeration)
 
     /**
      * $field.comment
@@ -274,7 +273,7 @@ $validator
      * @param $field.logicalName.substring(0, 1).toLowerCase()$field.logicalName.substring(1)$oneToMany
      */
     public void set$field.logicalName.substring(0, 1).toUpperCase()$field.logicalName.substring(1)($field.enumName $field.logicalName.substring(0, 1).toLowerCase()$field.logicalName.substring(1)) {
-        this.$field.logicalName.substring(0, 1).toLowerCase()$field.logicalName.substring(1)$oneToMany = $field.logicalName.substring(0, 1).toLowerCase()$field.logicalName.substring(1)#if($field.enumeration).toString()#end;
+        this.$field.logicalName.substring(0, 1).toLowerCase()$field.logicalName.substring(1)$oneToMany = $field.logicalName.substring(0, 1).toLowerCase()$field.logicalName.substring(1)#if($field.enumeration)#end;
     }
 
     /**
@@ -283,7 +282,7 @@ $validator
      * @return $field.enumName
      */
     public $field.enumName get$field.logicalName.substring(0, 1).toUpperCase()$field.logicalName.substring(1)() {
-        return ObjectHelper.getEnumFromStringValue(this.$field.logicalName.substring(0, 1).toLowerCase()$field.logicalName.substring(1), ${field.enumName}.class);
+         return this.$field.logicalName.substring(0, 1).toLowerCase()$field.logicalName.substring(1);
     }
 #end
 #end

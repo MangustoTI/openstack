@@ -13,13 +13,8 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
-/** 
- *
- * @author BTG PACTUAL - GSB
- * @since 1.0
- * 
- */
- 
+#include("comments.vm")
+
 @Remote(value = ${entityName}Service.class)
 @Stateless(mappedName = "${entityName}ServiceImpl")
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)

@@ -21,13 +21,8 @@ import com.indracompany.core.DefaultCriteriaCondition;
 import com.indracompany.core.model.ValueListHolder;
 import com.indracompany.core.service.CrudBusinessException;
 
-/** 
- *
- * @author BTG PACTUAL - GSB
- * @since 1.0
- * 
- */
- 
+#include("comments.vm")
+
 public class ${entityName}ServiceImplTest  {
 
 	private ${typePK} id;

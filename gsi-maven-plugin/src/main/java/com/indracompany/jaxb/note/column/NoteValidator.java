@@ -389,14 +389,14 @@ public class NoteValidator {
 				entityTO.getPackageValidator().add(
 						ValidatorType.NotNull.getValue());
 		}
-		if (this.isNotEmpty() != null) {
-			this.getValidators().add(
-					ANNOTATION + ValidatorType.NotEmpty.toString());
-			if (!entityTO.getPackageValidatorAplication().contains(
-					ValidatorType.NotEmpty.getValue()))
-				entityTO.getPackageValidatorAplication().add(
-						ValidatorType.NotEmpty.getValue());
-		}
+//		if (this.isNotEmpty() != null) {
+//			this.getValidators().add(
+//					ANNOTATION + ValidatorType.NotEmpty.toString());
+//			if (!entityTO.getPackageValidatorAplication().contains(
+//					ValidatorType.NotEmpty.getValue()))
+//				entityTO.getPackageValidatorAplication().add(
+//						ValidatorType.NotEmpty.getValue());
+//		}
 		if (this.isPast() != null) {
 			this.getValidators()
 					.add(ANNOTATION + ValidatorType.Past.toString());

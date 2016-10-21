@@ -47,9 +47,21 @@ public class EngineDefaultTemplate extends AbstractTemplateMethod {
 				map.put(VelocityType.PACKAGE_DEFAULT.getValue(),    this.getPathPackage().replace(".", "/"));
 				map.put(VelocityType.TYPE_PK.getValue(),     	    this.getType(this.getPK(entity).getPhysicalDataType().getContent(), false).getType());
 
-				String dataInterface 	= VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,  this.getTypeTemplate().getFileTemplateInterface(), map);
-				String dataImpl 	    = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,  this.getTypeTemplate().getFileTemplateImpl(), map);
-				String dataTest 	    = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,  this.getTypeTemplate().getFileTemplateTest(), map);
+				String dataInterface    = null;
+				String dataImpl    		= null;
+				String dataTest    		= null;
+				if(this.getTypeTemplate().getFileTemplateInterface() != null) {
+						dataInterface 	= VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,  this.getTypeTemplate().getFileTemplateInterface(), map);
+				}
+				
+				if(this.getTypeTemplate().getFileTemplateImpl() != null) {
+						dataImpl 	    = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,  this.getTypeTemplate().getFileTemplateImpl(), map);
+				}
+				
+				if(this.getTypeTemplate().getFileTemplateTest() != null) {
+						dataTest 	    = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,  this.getTypeTemplate().getFileTemplateTest(), map);
+				}				
+					
 				this.write(this.getTypeTemplate(), entityName, dataInterface, dataImpl, dataTest, null);
 			}
 		}

@@ -83,6 +83,7 @@ public abstract class AbstractTemplateMethod {
 	protected void write(TypeTemplate typeTemplate, String className,
 			String dataInterface, String dataImpl, String dataTest,
 			String dataResource) throws Exception {
+		
 		if (dataInterface != null)
 			IOUtils.write(dataInterface, new FileOutputStream(new File(
 					PackageType.JAVA.getValue()
@@ -95,18 +96,19 @@ public abstract class AbstractTemplateMethod {
 							+ this.getPathPackage().replace(".", "/")
 							+ typeTemplate.getPrefixPackageImpl() + className
 							+ typeTemplate.getSuffixImpl())));
-		if (dataTest != null)
-			IOUtils.write(dataTest, new FileOutputStream(new File(
-					PackageType.TEST.getValue()
-							+ this.getPathPackage().replace(".", "/")
-							+ typeTemplate.getPrefixPackageImpl() + className
-							+ typeTemplate.getSuffixTest())));
-		if (dataResource != null)
-			IOUtils.write(dataResource, new FileOutputStream(new File(
-					PackageType.RESOURCES_TEST.getValue()
-							+ this.getPathPackage().replace(".", "/")
-							+ typeTemplate.getPrefixPackageImpl() + className
-							+ typeTemplate.getSuffixImpl())));
+		
+//		if (dataTest != null)
+//			IOUtils.write(dataTest, new FileOutputStream(new File(
+//					PackageType.TEST.getValue()
+//							+ this.getPathPackage().replace(".", "/")
+//							+ typeTemplate.getPrefixPackageImpl() + className
+//							+ typeTemplate.getSuffixTest())));
+//		if (dataResource != null)
+//			IOUtils.write(dataResource, new FileOutputStream(new File(
+//					PackageType.RESOURCES_TEST.getValue()
+//							+ this.getPathPackage().replace(".", "/")
+//							+ typeTemplate.getPrefixPackageImpl() + className
+//							+ typeTemplate.getSuffixImpl())));
 	}
 
 	/**

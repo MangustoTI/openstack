@@ -44,19 +44,23 @@ public class GsiTemplateImpl implements GsiTemplateInterface {
 	public void build() throws Exception {
 		ERwin elementERWin = this.getElementERwin();
 		if (elementERWin != null) {
-			AbstractTemplateMethod engineTemplate = this.getInstanceEngineTemplate();
-			if(engineTemplate != null) {
-				engineTemplate.setPathPackage(this.getPathPackage());
-				if(this.getTypeTemplate().toUpperCase().equals(TypeTemplate.SERVICEDAO.toString())) {					
-					engineTemplate.execute(this.getVelocityEngine(), elementERWin);			
-					this.setTypeTemplate(TypeTemplate.DAO.toString());					
-					engineTemplate = this.getInstanceEngineTemplate();
+			//if(engineTemplate != null) {
+				String splitTemplate[] = this.getTypeTemplate().split(",");				
+				for(String typeTemplate : splitTemplate) {
+					this.setTypeTemplate(typeTemplate);
+					AbstractTemplateMethod engineTemplate = this.getInstanceEngineTemplate();
 					engineTemplate.setPathPackage(this.getPathPackage());
-					engineTemplate.execute(this.getVelocityEngine(), elementERWin);					
-				}else {					
-					engineTemplate.execute(this.getVelocityEngine(), elementERWin);
-				}					
-			}
+					if(this.getTypeTemplate().toUpperCase().equals(TypeTemplate.SERVICEDAO.toString())) {					
+						engineTemplate.execute(this.getVelocityEngine(), elementERWin);			
+						this.setTypeTemplate(TypeTemplate.DAO.toString());					
+						engineTemplate = this.getInstanceEngineTemplate();
+						engineTemplate.setPathPackage(this.getPathPackage());
+						engineTemplate.execute(this.getVelocityEngine(), elementERWin);					
+					}else {					
+						engineTemplate.execute(this.getVelocityEngine(), elementERWin);
+					}					
+				}
+		//	}
 		}
 	}
 

@@ -7,12 +7,8 @@ import ${package}.model.dto.${entity.logicalName}DTO;
 
 import com.btg.pactual.commons.utilities.dtobuilder.DTOBuilder;
 
-/** 
- *
- * @author BTG PACTUAL - GSB
- * @since 1.0
- * 
- */
+#include("comments.vm")
+
 public class ${entity.logicalName}Builder implements DTOBuilder<${entity.logicalName}, ${entity.logicalName}DTO> {
 
 

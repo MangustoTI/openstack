@@ -104,7 +104,7 @@ public class EngineEntityTemplate extends AbstractTemplateMethod {
 			this.generateProperties(velocityEngine, mapRelationships);
 			this.generateProperties(velocityEngine, mapRelationships, PackageType.JAVA, TypeTemplate.META_MODEL);
 			this.generateProperties(velocityEngine, mapRelationships, PackageType.JAVA, TypeTemplate.DTO);
-			this.generateProperties(velocityEngine, mapRelationships, PackageType.JAVA, TypeTemplate.BUILDER);
+			//this.generateProperties(velocityEngine, mapRelationships, PackageType.JAVA, TypeTemplate.BUILDER);
 		}
 	}
 
@@ -1046,19 +1046,20 @@ public class EngineEntityTemplate extends AbstractTemplateMethod {
 								.getValidators()
 								.add(columnTO.getType().equals(
 										Types.VARCHAR2.getType()) ? ANNOTATION
-										+ ValidatorType.NotEmpty.toString()
+										+ ValidatorType.NotNull.toString()
 										: ANNOTATION
 												+ ValidatorType.NotNull
 														.toString());
 						columnTO.setNotNullNoteValidator(true);
-						if (columnTO.getType().equals(Types.VARCHAR2.getType())
-								&& !entityTO.getPackageValidatorAplication()
-										.contains(
-												ValidatorType.NotEmpty
-														.getValue()))
-							entityTO.getPackageValidatorAplication().add(
-									ValidatorType.NotEmpty.getValue());
-						else if (!entityTO.getPackageValidator().contains(
+//						if (columnTO.getType().equals(Types.VARCHAR2.getType())
+//								&& !entityTO.getPackageValidatorAplication()
+//										.contains(
+//												ValidatorType.NotEmpty
+//														.getValue()))
+//							entityTO.getPackageValidatorAplication().add(
+//									ValidatorType.NotEmpty.getValue());
+//						else 
+						if (!entityTO.getPackageValidator().contains(
 								ValidatorType.NotNull.getValue()))
 							entityTO.getPackageValidator().add(
 									ValidatorType.NotNull.getValue());
@@ -1079,17 +1080,18 @@ public class EngineEntityTemplate extends AbstractTemplateMethod {
 							.getValidators()
 							.add(columnTO.getType().equals(
 									Types.VARCHAR2.getType()) ? ANNOTATION
-									+ ValidatorType.NotEmpty.toString()
+									+ ValidatorType.NotNull.toString()
 									: ANNOTATION
 											+ ValidatorType.NotNull.toString());
 					columnTO.setNotNullNoteValidator(true);
-					if (columnTO.getType().equals(Types.VARCHAR2.getType())
-							&& !entityTO
-									.getPackageValidatorAplication()
-									.contains(ValidatorType.NotEmpty.getValue()))
-						entityTO.getPackageValidatorAplication().add(
-								ValidatorType.NotEmpty.getValue());
-					else if (!entityTO.getPackageValidator().contains(
+//					if (columnTO.getType().equals(Types.VARCHAR2.getType())
+//							&& !entityTO
+//									.getPackageValidatorAplication()
+//									.contains(ValidatorType.NotEmpty.getValue()))
+//						entityTO.getPackageValidatorAplication().add(
+//								ValidatorType.NotEmpty.getValue());
+//					else 
+					if (!entityTO.getPackageValidator().contains(
 							ValidatorType.NotNull.getValue()))
 						entityTO.getPackageValidator().add(
 								ValidatorType.NotNull.getValue());
